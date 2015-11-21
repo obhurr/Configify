@@ -160,6 +160,6 @@ Now that the pizza configuration has been defined, we can run an instance and su
         return;
     }
 
-    //Export to results to JSON
+    //Export the results to JSON
     var exporter = new ConfigurationInstanceExporter();
     var output = exporter.ExportToJson(instance);
