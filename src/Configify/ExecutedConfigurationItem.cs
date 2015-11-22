@@ -6,11 +6,11 @@ namespace Configify
     {
         public string Name { get; set; }
 
-        public IList<ExecutedConfigurationItemOption> ItemOptions { get; private set; }
+        public IList<ExecutedConfigurationItemOption> ConfigurationItemOptions { get; private set; }
 
         public ExecutedConfigurationItem()
         {
-            ItemOptions = new List<ExecutedConfigurationItemOption>();
+            ConfigurationItemOptions = new List<ExecutedConfigurationItemOption>();
         }
     }
 }

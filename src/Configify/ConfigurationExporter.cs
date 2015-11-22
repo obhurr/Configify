@@ -32,7 +32,7 @@ namespace Configify
 
                 foreach (var configurationItemOption in item.ConfigurationItemOptions)
                 {
-                    eci.ItemOptions.Add(new ExecutedConfigurationItemOption
+                    eci.ConfigurationItemOptions.Add(new ExecutedConfigurationItemOption
                     {
                         Name = configurationItemOption.Name,
                         Description = configurationItemOption.Description,
