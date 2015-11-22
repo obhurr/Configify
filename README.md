@@ -6,6 +6,8 @@ Configify is a framework to allow simple products to be configured.
 #How to use - Pizza example
 A pizza has a size, a crust, and toppings. The size can be either small, medium, or large and only 1 choice is allowed. Likewise the crust can be either thick, thin, or cheese stuffed and only 1 choice is allowed. The toppings are a bit different. Multiple toppings can be added. The following code defines a Pizza configuration with all available sub items and their options and rules.
 
+    public class PizzaConfigurationBuilder
+    {
         public Configuration Build()
         {
             var pizza = new Configuration
@@ -27,10 +29,11 @@ A pizza has a size, a crust, and toppings. The size can be either small, medium,
             {
                 Name = "Size",
                 Sequence = sequence,
-                OptionsMinCount = 1,
-                OptionsMaxCount = 1,
                 EndUserInstructions = "Choose your Size"
             };
+
+            configurationItem.ConfigurationRules.Add(new MaxSelectedOptionsRule {Count = 1});
+            configurationItem.ConfigurationRules.Add(new MinSelectedOptionsRule {Count = 1});
 
             configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
@@ -62,10 +65,11 @@ A pizza has a size, a crust, and toppings. The size can be either small, medium,
             {
                 Name = "Crust",
                 Sequence = sequence,
-                OptionsMinCount = 1,
-                OptionsMaxCount = 1,
                 EndUserInstructions = "Choose your Crust"
             };
+
+            configurationItem.ConfigurationRules.Add(new MaxSelectedOptionsRule { Count = 1 });
+            configurationItem.ConfigurationRules.Add(new MinSelectedOptionsRule { Count = 1 });
 
             configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
@@ -94,10 +98,9 @@ A pizza has a size, a crust, and toppings. The size can be either small, medium,
             {
                 Name = "Toppings",
                 Sequence = sequence,
-                OptionsMinCount = 1,
-                OptionsMaxCount = 99,
                 EndUserInstructions = "Choose your toppings"
             };
+            configurationItem.ConfigurationRules.Add(new MinSelectedOptionsRule { Count = 1 });
 
             configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
@@ -131,30 +134,31 @@ A pizza has a size, a crust, and toppings. The size can be either small, medium,
 
             return configurationItem;
         }
+    }
 
 Now that the pizza configuration has been defined, we can execute it and supply our own options, just as if we were a customer ordering a pizza. The helper _ConfigurationItemOptionsSetter_ class is used to set option values.
 
-		//Get our configuration for a pizza
-		var configurationBuilder = new PizzaConfigurationBuilder();
-		var configuration = configurationBuilder.Build();
+	//Get our configuration for a pizza
+	var configurationBuilder = new PizzaConfigurationBuilder();
+	var configuration = configurationBuilder.Build();
 
-		//Set our options
-		var optionsSetter = new ConfigurationItemOptionsSetter();
-		optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Size", "Large", true);
-		optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Crust", "Thick", true);
-		optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Toppings", "Extra Cheese", true);
-		optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Toppings", "Pepperoni", true);
+	//Set our options
+	var optionsSetter = new ConfigurationItemOptionsSetter();
+	optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Size", "Large", true);
+	optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Crust", "Thick", true);
+	optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Toppings", "Extra Cheese", true);
+	optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Toppings", "Pepperoni", true);
 
-		//Make sure the configuration is correct
-		var checker = new ConfigurationRulesChecker();
-		List<string> errors;
-		checker.Check(configuration, out errors);
+	//Make sure the configuration is correct
+	var checker = new ConfigurationRulesChecker();
+	List<string> errors;
+	checker.Check(configuration, out errors);
 
-		if (errors.Any())
-		{
-			return;
-		}
+	if (errors.Any())
+	{
+		return;
+	}
 
-		//Export the results to JSON
-		var exporter = new ConfigurationExporter();
-		var output = exporter.ExportToJson(configuration);
+	//Export the results to JSON
+	var exporter = new ConfigurationExporter();
+	var output = exporter.ExportToJson(configuration);

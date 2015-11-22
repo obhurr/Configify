@@ -14,18 +14,54 @@ namespace Configify
 
             foreach (var configurationItem in configuration.ConfigurationItems)
             {
-                var optionsCount = configurationItem.ConfigurationItemOptions.Count(o=>o.IsSelected);
-
-                if (optionsCount < configurationItem.OptionsMinCount)
+                foreach (var configurationRule in configurationItem.ConfigurationRules)
                 {
-                    errors.Add($"{configurationItem.Name} requires at least {configurationItem.OptionsMinCount} option(s)");
-                }
+                    if (configurationRule is MaxSelectedOptionsRule)
+                    {
+                        string error;
+                        MaxSelectedOptionsRuleCheck(configurationItem, configurationRule as MaxSelectedOptionsRule, out error);
+                        if (!string.IsNullOrEmpty(error))
+                        {
+                            errors.Add(error);                            
+                        }
+                    }
 
-                if (optionsCount > configurationItem.OptionsMaxCount)
-                {
-                    errors.Add($"{configurationItem.Name} can have no more than {configurationItem.OptionsMaxCount} option(s)");
+                    if (configurationRule is MinSelectedOptionsRule)
+                    {
+                        string error;
+                        MinSelectedOptionsRuleCheck(configurationItem, configurationRule as MinSelectedOptionsRule, out error);
+                        if (!string.IsNullOrEmpty(error))
+                        {
+                            errors.Add(error);
+                        }
+                    }
                 }
             }
         }
+
+        public void MinSelectedOptionsRuleCheck(
+            ConfigurationItem configurationItem, MinSelectedOptionsRule rule, out string error)
+        {
+            error = string.Empty;
+            var selectedCount = configurationItem.ConfigurationItemOptions.Count(o => o.IsSelected);
+
+            if (selectedCount < rule.Count)
+            {
+                error = $"{configurationItem.Name} can have no more than {rule.Count} option(s)";
+            }
+        }
+
+        public void MaxSelectedOptionsRuleCheck(
+            ConfigurationItem configurationItem, MaxSelectedOptionsRule rule, out string error)
+        {
+            error = string.Empty;
+            var selectedCount = configurationItem.ConfigurationItemOptions.Count(o => o.IsSelected);
+
+            if (selectedCount > rule.Count)
+            {
+                error = $"{configurationItem.Name} requires at least {rule.Count} option(s)";
+            }
+        }
+
     }
 }

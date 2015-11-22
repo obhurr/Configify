@@ -24,19 +24,12 @@ namespace Configify
 
         public IList<ConfigurationItemOption> ConfigurationItemOptions { get; private set; }
 
-        /// <summary>
-        /// The minimum number of options required in order to satisfy the item's requirement
-        /// </summary>
-        public decimal OptionsMinCount { get; set; }
-
-        /// <summary>
-        /// The maximum number of options required in order to satisfy the item's requirement
-        /// </summary>
-        public decimal OptionsMaxCount { get; set; }
+        public IList<IConfigurationRule> ConfigurationRules { get; private set; }
 
         public ConfigurationItem()
         {
             ConfigurationItemOptions = new List<ConfigurationItemOption>();
+            ConfigurationRules = new List<IConfigurationRule>();
         }
 
     }

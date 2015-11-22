@@ -37,6 +37,58 @@ namespace Configify.Test
             Assert.IsNotEmpty(errors);
         }
 
+        [Test]
+        public void Min_Selected_Options_Rule_Returns_An_Error()
+        {
+            var checker = new ConfigurationRulesChecker();
+            var configItem = new ConfigurationItem();
+            configItem.ConfigurationItemOptions.Add( new ConfigurationItemOption {Name="Test", IsSelected = false});                
+           
+            string error;
+            checker.MinSelectedOptionsRuleCheck(configItem, new MinSelectedOptionsRule {Count = 1},  out error);
+            
+            Assert.IsNotEmpty(error);
+        }
 
+        [Test]
+        public void Min_Selected_Options_Rule_Does_Not_Return_An_Error()
+        {
+            var checker = new ConfigurationRulesChecker();
+            var configItem = new ConfigurationItem();
+            configItem.ConfigurationItemOptions.Add(new ConfigurationItemOption { Name = "Test", IsSelected = true});
+
+            string error;
+            checker.MinSelectedOptionsRuleCheck(configItem, new MinSelectedOptionsRule { Count = 1 }, out error);
+
+            Assert.IsEmpty(error);
+        }
+
+        [Test]
+        public void Max_Selected_Options_Rule_Returns_An_Error()
+        {
+            var checker = new ConfigurationRulesChecker();
+            var configItem = new ConfigurationItem();
+            configItem.ConfigurationItemOptions.Add(new ConfigurationItemOption { Name = "Test 1", IsSelected = true });
+            configItem.ConfigurationItemOptions.Add(new ConfigurationItemOption { Name = "Test 2", IsSelected = true });
+
+            string error;
+            checker.MaxSelectedOptionsRuleCheck(configItem, new MaxSelectedOptionsRule { Count = 1 }, out error);
+
+            Assert.IsNotEmpty(error);
+        }
+
+        [Test]
+        public void Max_Selected_Options_Rule_Does_Not_Return_An_Error()
+        {
+            var checker = new ConfigurationRulesChecker();
+            var configItem = new ConfigurationItem();
+            configItem.ConfigurationItemOptions.Add(new ConfigurationItemOption { Name = "Test 1", IsSelected = true });
+            configItem.ConfigurationItemOptions.Add(new ConfigurationItemOption { Name = "Test 2", IsSelected = true });
+
+            string error;
+            checker.MaxSelectedOptionsRuleCheck(configItem, new MaxSelectedOptionsRule { Count = 2 }, out error);
+
+            Assert.IsEmpty(error);
+        }
     }
 }

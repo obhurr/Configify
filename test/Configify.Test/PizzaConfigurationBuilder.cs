@@ -53,10 +53,11 @@ namespace Configify.Test
             {
                 Name = "Size",
                 Sequence = sequence,
-                OptionsMinCount = 1,
-                OptionsMaxCount = 1,
                 EndUserInstructions = "Choose your Size"
             };
+
+            configurationItem.ConfigurationRules.Add(new MaxSelectedOptionsRule {Count = 1});
+            configurationItem.ConfigurationRules.Add(new MinSelectedOptionsRule {Count = 1});
 
             configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
@@ -88,10 +89,11 @@ namespace Configify.Test
             {
                 Name = "Crust",
                 Sequence = sequence,
-                OptionsMinCount = 1,
-                OptionsMaxCount = 1,
                 EndUserInstructions = "Choose your Crust"
             };
+
+            configurationItem.ConfigurationRules.Add(new MaxSelectedOptionsRule { Count = 1 });
+            configurationItem.ConfigurationRules.Add(new MinSelectedOptionsRule { Count = 1 });
 
             configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
@@ -120,10 +122,9 @@ namespace Configify.Test
             {
                 Name = "Toppings",
                 Sequence = sequence,
-                OptionsMinCount = 1,
-                OptionsMaxCount = 99,
                 EndUserInstructions = "Choose your toppings"
             };
+            configurationItem.ConfigurationRules.Add(new MinSelectedOptionsRule { Count = 1 });
 
             configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
