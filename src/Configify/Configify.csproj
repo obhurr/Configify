@@ -46,12 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationInstance.cs" />
-    <Compile Include="ConfigurationInstanceCompletenessEvaluator.cs" />
-    <Compile Include="ConfigurationInstanceExport.cs" />
-    <Compile Include="ConfigurationInstanceExporter.cs" />
-    <Compile Include="ConfigurationItemInstance.cs" />
-    <Compile Include="ConfigurationInstanceItemOptionsSetter.cs" />
+    <Compile Include="ConfigurationExporter.cs" />
+    <Compile Include="ConfigurationItemOptionsSetter.cs" />
+    <Compile Include="ConfigurationRulesChecker.cs" />
+    <Compile Include="ExecutedConfiguration.cs" />
+    <Compile Include="ExecutedConfigurationItem.cs" />
+    <Compile Include="ExecutedConfigurationItemOption.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration.cs" />

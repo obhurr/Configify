@@ -10,17 +10,17 @@ using NUnit.Framework;
 namespace Configify.Test
 {
     [TestFixture]
-    public class ConfigurationInstanceCompletenessEvaluatorTests
+    public class ConfigurationRulesCheckerTests
     {
 
         [Test]
         public void A_Complete_Instance_Returns_No_Errors()
         {
-            var instance = PizzaConfigurationBuilder.BuildCompleteInstance();
-            var evaluator = new ConfigurationInstanceCompletenessEvaluator();
+            var configuration = PizzaConfigurationBuilder.BuildCompleteInstance();
+            var checker = new ConfigurationRulesChecker();
 
             List<string> errors;
-            evaluator.Evaluate(instance, out errors);
+            checker.Check(configuration, out errors);
 
             Assert.IsEmpty(errors);
         }
@@ -28,11 +28,11 @@ namespace Configify.Test
         [Test]
         public void An_InComplete_Instance_Returns_Errors()
         {
-            var instance = PizzaConfigurationBuilder.BuildInstanceWithNoSetOptions();
-            var evaluator = new ConfigurationInstanceCompletenessEvaluator();
+            var configuration = PizzaConfigurationBuilder.BuildWithNoSetOptions();
+            var checker = new ConfigurationRulesChecker();
 
             List<string> errors;
-            evaluator.Evaluate(instance, out errors);
+            checker.Check(configuration, out errors);
 
             Assert.IsNotEmpty(errors);
         }

@@ -46,10 +46,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationInstanceExporterTests.cs" />
-    <Compile Include="ConfigurationInstanceItemOptionsSetterTests.cs" />
+    <Compile Include="ConfigurationExporterTests.cs" />
+    <Compile Include="ConfigurationItemOptionsSetterTests.cs" />
     <Compile Include="PizzaConfigurationBuilder.cs" />
-    <Compile Include="ConfigurationInstanceCompletenessEvaluatorTests.cs" />
+    <Compile Include="ConfigurationRulesCheckerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

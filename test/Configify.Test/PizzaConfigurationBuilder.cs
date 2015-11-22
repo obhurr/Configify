@@ -25,36 +25,31 @@ namespace Configify.Test
             return pizza;
         }
 
-        public static ConfigurationInstance BuildCompleteInstance()
+        public static Configuration BuildCompleteInstance()
         {
             var configurationBuilder = new PizzaConfigurationBuilder();
             var configuration = configurationBuilder.Build();
 
-            var instance = ConfigurationInstance.Build(configuration);
+            var optionsSetter = new ConfigurationItemOptionsSetter();
 
-            var optionsSetter = new ConfigurationInstanceItemOptionsSetter();
+            optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Size", "Large", true);
+            optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Crust", "Thick", true);
+            optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Toppings", "Extra Cheese", true);
+            optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Toppings", "Pepperoni", true);
 
-            optionsSetter.Add(instance, new Option("Size", "Large"));
-            optionsSetter.Add(instance, new Option("Crust", "Thick"));
-            optionsSetter.Add(instance, new Option("Toppings", "Extra Cheese"));
-            optionsSetter.Add(instance, new Option("Toppings", "Pepperoni"));
-
-            return instance;
+            return configuration;
         }
 
-        public static ConfigurationInstance BuildInstanceWithNoSetOptions()
+        public static Configuration BuildWithNoSetOptions()
         {
             var configurationBuilder = new PizzaConfigurationBuilder();
             var configuration = configurationBuilder.Build();
-
-            var instance = ConfigurationInstance.Build(configuration);
-
-            return instance;
+            return configuration;
         }
 
         private ConfigurationItem BuildSizeItem(int sequence)
         {
-            var rule = new ConfigurationItem
+            var configurationItem = new ConfigurationItem
             {
                 Name = "Size",
                 Sequence = sequence,
@@ -63,33 +58,33 @@ namespace Configify.Test
                 EndUserInstructions = "Choose your Size"
             };
 
-            rule.ConfigurationItemOptions.Add(new ConfigurationItemOption
+            configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
                 Name = "Small",
                 Description = "4 slices, feeds 1 person",
                 Sequence = 1
             });
 
-            rule.ConfigurationItemOptions.Add(new ConfigurationItemOption
+            configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
                 Name = "Medium",
                 Description = "8 slices, feeds 2 people",
                 Sequence = 2
             });
 
-            rule.ConfigurationItemOptions.Add(new ConfigurationItemOption
+            configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
                 Name = "Large",
                 Description = "16 slices, feeds 3 or 4 people",
                 Sequence = 3
             });
 
-            return rule;
+            return configurationItem;
         }
 
         private ConfigurationItem BuildCrustItem(int sequence)
         {
-            var rule = new ConfigurationItem
+            var configurationItem = new ConfigurationItem
             {
                 Name = "Crust",
                 Sequence = sequence,
@@ -98,30 +93,30 @@ namespace Configify.Test
                 EndUserInstructions = "Choose your Crust"
             };
 
-            rule.ConfigurationItemOptions.Add(new ConfigurationItemOption
+            configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
                 Name = "Thin",
                 Sequence = 1
             });
 
-            rule.ConfigurationItemOptions.Add(new ConfigurationItemOption
+            configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
                 Name = "Thick",
                 Sequence = 2
             });
 
-            rule.ConfigurationItemOptions.Add(new ConfigurationItemOption
+            configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
                 Name = "Cheese Filled",
                 Sequence = 3
             });
 
-            return rule;
+            return configurationItem;
         }
 
         private ConfigurationItem BuildToppingsItem(int sequence)
         {
-            var rule = new ConfigurationItem
+            var configurationItem = new ConfigurationItem
             {
                 Name = "Toppings",
                 Sequence = sequence,
@@ -130,37 +125,66 @@ namespace Configify.Test
                 EndUserInstructions = "Choose your toppings"
             };
 
-            rule.ConfigurationItemOptions.Add(new ConfigurationItemOption
+            configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
                 Name = "Extra Cheese",
                 Sequence = 1
             });
 
-            rule.ConfigurationItemOptions.Add(new ConfigurationItemOption
+            configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
                 Name = "Pepperoni",
                 Sequence = 2
             });
 
-            rule.ConfigurationItemOptions.Add(new ConfigurationItemOption
+            configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
                 Name = "Sausage",
                 Sequence = 3
             });
 
-            rule.ConfigurationItemOptions.Add(new ConfigurationItemOption
+            configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
                 Name = "Canadian Bacon",
                 Sequence = 4
             });
 
-            rule.ConfigurationItemOptions.Add(new ConfigurationItemOption
+            configurationItem.ConfigurationItemOptions.Add(new ConfigurationItemOption
             {
                 Name = "Mushrooms",
                 Sequence = 5
             });
 
-            return rule;
+            return configurationItem;
         }
+
+        private void ReadMeExample()
+        {
+            //Get our configuration for a pizza
+            var configurationBuilder = new PizzaConfigurationBuilder();
+            var configuration = configurationBuilder.Build();
+
+            //Set our options
+            var optionsSetter = new ConfigurationItemOptionsSetter();
+            optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Size", "Large", true);
+            optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Crust", "Thick", true);
+            optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Toppings", "Extra Cheese", true);
+            optionsSetter.SetOrUnSet(configuration.ConfigurationItems, "Toppings", "Pepperoni", true);
+
+            //Make sure the configuration is correct
+            var checker = new ConfigurationRulesChecker();
+            List<string> errors;
+            checker.Check(configuration, out errors);
+
+            if (errors.Any())
+            {
+                return;
+            }
+
+            //Export the results to JSON
+            var exporter = new ConfigurationExporter();
+            var output = exporter.ExportToJson(configuration);
+        }
+
     }
 }

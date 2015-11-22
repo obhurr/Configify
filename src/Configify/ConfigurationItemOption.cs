@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -22,6 +23,8 @@ namespace Configify
         /// The sequence of the option in the collection
         /// </summary>
         public int Sequence { get; set; }
+
+        public bool IsSelected { get; set; }
 
     }
 }

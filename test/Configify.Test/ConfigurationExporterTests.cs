@@ -10,14 +10,14 @@ using NUnit.Framework;
 namespace Configify.Test
 {
     [TestFixture]
-    public class ConfigurationInstanceExporterTests
+    public class ConfigurationExporterTests
     {
         [Test]
         public void Does_Export()
         {
-            var exporter = new ConfigurationInstanceExporter();
-            var instance = PizzaConfigurationBuilder.BuildCompleteInstance();
-            var output = exporter.ExportToJson(instance);
+            var exporter = new ConfigurationExporter();
+            var configuration = PizzaConfigurationBuilder.BuildCompleteInstance();
+            var output = exporter.ExportToJson(configuration);
             Assert.IsNotNull(output);
         }
     }
