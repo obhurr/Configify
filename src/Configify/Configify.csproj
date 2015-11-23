@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="ConfigurationExporter.cs" />
     <Compile Include="ConfigurationItemOptionsSetter.cs" />
+    <Compile Include="ConfigurationPriceCalculator.cs" />
     <Compile Include="ConfigurationRulesChecker.cs" />
     <Compile Include="ExecutedConfiguration.cs" />
     <Compile Include="ExecutedConfigurationItem.cs" />

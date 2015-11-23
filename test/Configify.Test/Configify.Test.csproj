@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="ConfigurationExporterTests.cs" />
     <Compile Include="ConfigurationItemOptionsSetterTests.cs" />
+    <Compile Include="ConfigurationPriceCalculatorTests.cs" />
     <Compile Include="PizzaConfigurationBuilder.cs" />
     <Compile Include="ConfigurationRulesCheckerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
