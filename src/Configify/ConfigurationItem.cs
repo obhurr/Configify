@@ -13,14 +13,24 @@ namespace Configify
         public string Name { get; set; }
 
         /// <summary>
-        /// Instructions for the end user that help him understand what he needs to do in order to configure the item
+        /// Optional field that can represent an item number/part number from a back end inventory system
         /// </summary>
-        public string EndUserInstructions { get; set; }
-        
+        public string ItemId { get; set; }
+
+        /// <summary>
+        /// Optional field that represents the price for the item
+        /// </summary>
+        public decimal Price { get; set; }
+
         /// <summary>
         /// The sequence of the item in the collection
         /// </summary>
         public int Sequence { get; set; }
+
+        /// <summary>
+        /// Optional instructions for the end user that help him understand what he needs to do in order to configure the item
+        /// </summary>
+        public string EndUserInstructions { get; set; }
 
         public IList<ConfigurationItemOption> ConfigurationItemOptions { get; private set; }
 

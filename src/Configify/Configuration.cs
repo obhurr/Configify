@@ -18,6 +18,16 @@ namespace Configify
         public string Description { get; set; }
 
         /// <summary>
+        /// Optional field that can represent an item number/part number from a back end inventory system
+        /// </summary>
+        public string ItemId { get; set; }
+
+        /// <summary>
+        /// Optional field that represents the price for the item
+        /// </summary>
+        public decimal Price { get; set; }
+
+        /// <summary>
         /// The collection of configuration items
         /// </summary>
         public IList<ConfigurationItem> ConfigurationItems { get; private set; }
