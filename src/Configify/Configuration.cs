@@ -7,6 +7,8 @@ namespace Configify
 {
     public class Configuration
     {
+        public Guid Id { get; set; }
+        
         /// <summary>
         /// The name of the configuration
         /// </summary>

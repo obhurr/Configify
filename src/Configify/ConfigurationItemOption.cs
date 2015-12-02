@@ -8,6 +8,7 @@ namespace Configify
 {
     public class ConfigurationItemOption
     {
+        public Guid Id { get; set; }
 
         /// <summary>
         /// The name of the option
