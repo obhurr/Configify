@@ -9,5 +9,7 @@ namespace Configify
     public class MinSelectedOptionsRule : IConfigurationRule
     {
         public int Count { get; set; }
+
+        public string Name => "MinSelectedOptionsRule";
     }
 }

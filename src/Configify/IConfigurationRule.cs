@@ -11,6 +11,9 @@ namespace Configify
     /// </summary>
     public interface IConfigurationRule
     {
-        
+        /// <summary>
+        /// Necessary for serialization
+        /// </summary>
+        string Name { get; }
     }
 }
