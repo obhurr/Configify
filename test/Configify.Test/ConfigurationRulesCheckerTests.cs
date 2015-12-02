@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Configify;
+using Configify.Data.Fakes;
 using NUnit;
 using NUnit.Framework;
 
