@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Configify</RootNamespace>
     <AssemblyName>Configify</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -50,6 +50,7 @@
     <Compile Include="ConfigurationItemOptionsSetter.cs" />
     <Compile Include="ConfigurationPriceCalculator.cs" />
     <Compile Include="ConfigurationRulesChecker.cs" />
+    <Compile Include="Data\IConfigurationRepository.cs" />
     <Compile Include="ExecutedConfiguration.cs" />
     <Compile Include="ExecutedConfigurationItem.cs" />
     <Compile Include="ExecutedConfigurationItemOption.cs" />
