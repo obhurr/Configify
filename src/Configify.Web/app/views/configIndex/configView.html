@@ -1,0 +1,28 @@
+﻿<h2>Configuration: {{config.name}}</h2>
+
+<div class="progress" data-ng-show="isBusy">
+    <div class="progress-bar progress-bar-striped active" style="width: 100%"></div>
+</div>
+
+<form name="configForm" class="form-horizontal" role="form">
+    <fieldset>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" class="btn btn-primary" value="Save" data-ng-click="save()" />
+                <input type="button" class="btn btn" value="Cancel" data-ng-click="cancel()" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name" class="control-label  col-sm-2">Name</label>
+            <div class="col-sm-10">
+                <input id="name" name="name" type="text" class="form-control" data-ng-model="config.name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description" class="control-label col-sm-2">Description</label>
+            <div class="col-sm-10">
+                <input id="description" name="description" type="text" class="form-control" data-ng-model="config.description"/>
+            </div>
+        </div>
+    </fieldset>
+</form>
