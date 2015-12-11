@@ -14,14 +14,110 @@
         </div>
         <div class="form-group">
             <label for="name" class="control-label  col-sm-2">Name</label>
-            <div class="col-sm-10">
-                <input id="name" name="name" type="text" class="form-control" data-ng-model="config.name">
+            <div class="col-sm-6">
+                <input id="name" name="name" type="text" class="form-control" data-ng-model="workingConfig.name">
             </div>
         </div>
         <div class="form-group">
             <label for="description" class="control-label col-sm-2">Description</label>
-            <div class="col-sm-10">
-                <input id="description" name="description" type="text" class="form-control" data-ng-model="config.description"/>
+            <div class="col-sm-6">
+                <input id="description" name="description" type="text" class="form-control" data-ng-model="workingConfig.description"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="price" class="control-label col-sm-2">Price</label>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <span class="input-group-addon">$</span>
+                    <input id="price" name="price" type="number" class="form-control" data-ng-model="workingConfig.price" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="itemId" class="control-label col-sm-2">Item ID</label>
+            <div class="col-sm-6">
+                <input id="itemId" name="itemId" class="form-control" data-ng-model="workingConfig.itemId" />
+            </div>
+        </div>
+        <div>
+            <strong>Configurable Items</strong>
+            <div data-ng-repeat="i in workingConfig.configurationItems" style="width: 80%">
+                <div class="configurableItemListing">
+                    <div class="form-group">
+                        <label for="configItem.name" class="control-label col-sm-2">Name</label>
+                        <div class="col-sm-6">
+                            <input id="configItem.name" name="configItem.name" type="text" class="form-control" data-ng-model="i.name"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="configItem.sequence" class="control-label col-sm-2">Sequence</label>
+                        <div class="col-sm-3">
+                            <input id="configItem.sequence" name="configItem.sequence" type="number" class="form-control" data-ng-model="i.sequence"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="configItem.price" class="control-label col-sm-2">Price</label>
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input id="configItem.price" name="configItem.price" type="number" class="form-control" data-ng-model="i.price"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="configItem.itemId" class="control-label col-sm-2">Item ID</label>
+                        <div class="col-sm-6">
+                            <input id="configItem.itemId" name="configItem.itemId" class="form-control" data-ng-model="i.itemId"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="configItem.endUserInstructions" class="control-label col-sm-2">End User Instructions</label>
+                        <div class="col-sm-9">
+                            <textarea id="configItem.endUserInstructions" name="configItem.endUserInstructions" rows="3"
+                                      class="form-control" data-ng-model="i.endUserInstructions">
+                            </textarea>
+                        </div>
+                    </div>
+                    <strong>Options</strong>
+                    <div data-ng-repeat="j in i.configurationItemOptions" style="width: 80%">
+                        <div class="configurableItemOptionListing">
+                            <div class="form-group">
+                                <label for="option.name" class="control-label col-sm-2">Name</label>
+                                <div class="col-sm-6">
+                                    <input id="option.name" name="option.name" type="text" class="form-control" data-ng-model="j.name"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="option.sequence" class="control-label col-sm-2">Sequence</label>
+                                <div class="col-sm-3">
+                                    <input id="option.sequence" name="option.sequence" type="number" class="form-control" data-ng-model="j.sequence"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="option.description" class="control-label col-sm-2">Description</label>
+                                <div class="col-sm-10">
+                                    <input id="option.description" name="option.description" type="text" class="form-control" data-ng-model="j.description" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="option.price" class="control-label col-sm-2">Price</label>
+                                <div class="col-sm-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">$</span>
+                                        <input id="option.price" name="option.price" type="number" class="form-control" data-ng-model="j.price" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="option.itemId" class="control-label col-sm-2">Item ID</label>
+                                <div class="col-sm-6">
+                                    <input id="option.itemId" name="option.itemId" class="form-control" data-ng-model="j.itemId" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </fieldset>

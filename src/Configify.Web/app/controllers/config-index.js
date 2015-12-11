@@ -42,13 +42,15 @@ configIndex.controller('singleConfigController', ['$scope', '$http', '$routePara
     function($scope, $http, $routeParams, $window, dataService) {
         $scope.isBusy = true;
         $scope.config = null;
-        $scope.origConfig = null;
+        $scope.workingConfig = null;
 
         dataService.getConfigById($routeParams.configId)
             .then(function(cfg) {
                     //success
                     $scope.config = cfg;
-                    $scope.origConfig = angular.copy($scope.config);
+
+                    //Create a working copy for editing in the UI
+                    $scope.workingConfig = angular.copy($scope.config);
                 },
                 function() {
                     //error
@@ -61,7 +63,10 @@ configIndex.controller('singleConfigController', ['$scope', '$http', '$routePara
         $scope.save = function () {
             $scope.isBusy = true;
 
-            //todo: save the config
+            //todo: save the config to the database
+
+            //Update the config from the working copy
+            angular.copy($scope.workingConfig, $scope.config);
 
             $scope.isBusy = false;
 
@@ -69,8 +74,8 @@ configIndex.controller('singleConfigController', ['$scope', '$http', '$routePara
         }
 
         $scope.cancel = function () {
-            //revert back to the original
-            angular.copy($scope.origConfig, $scope.config);
+            //revert the working copy back to the original
+            angular.copy($scope.config, $scope.workingConfig);
             $window.location = "#/";
         }
 
